@@ -48,7 +48,7 @@ workflow scanpy{
 		call embedding{
 			input: h5ad = nearest_neighbors.nearest_neighbors,
 			name = pair.right,
-			resolution resolution
+			resolution = resolution
 		}
 
 		call rank_genes{
@@ -86,7 +86,7 @@ task qc_filtering{
 	runtime{
 		cpu: "1"
 		memory: "4 G"
-		docker_image: "atex91/scanpy-project"
+		docker: "atex91/scanpy-project"
 	}
 }
 
@@ -108,7 +108,7 @@ task highly_variable{
 	runtime{
 		cpu: "1"
 		memory: "8 G"
-		docker_image: "atex91/scanpy-project"
+		docker: "atex91/scanpy-project"
 	}
 }
 
@@ -130,7 +130,7 @@ task pca{
 	runtime{
 		cpu: "1"
 		memory: "8 G"
-		docker_image: "atex91/scanpy-project"
+		docker: "atex91/scanpy-project"
 	}
 }
 
@@ -153,7 +153,7 @@ task nearest_neighbors{
 	runtime{
 		cpu: "1"
 		memory: "8"
-		docker_image: "atex91/scanpy-project"
+		docker: "atex91/scanpy-project"
 	}
 }
 
@@ -176,7 +176,7 @@ task embedding{
 	runtime{
 		cpu: "1"
 		memory: "8"
-		docker_image: "atex91/scanpy-project"
+		docker: "atex91/scanpy-project"
 	}
 }
 
@@ -198,6 +198,6 @@ task rank_genes{
 	runtime{
 		cpu: "1"
 		memory: "8"
-		docker_image: "atex91/scanpy-project"
+		docker: "atex91/scanpy-project"
 	}
 }
