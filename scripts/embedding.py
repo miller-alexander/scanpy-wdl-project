@@ -27,7 +27,12 @@ sc.tl.umap(adata, init_pos='paga')
 #perform Leiden clustering
 sc.tl.leiden(adata, resolution=args.resolution)
 
-#plot UMAP with leiden clusters labeled
-sc.pl.umap(adata, color='leiden', save=True)
+#Strip .h5ad off outfile to retrieve name of channel
+channel_name = "_" + results_file.split(".")[0] + ".png"
+
+#set plotting parameters and plot UMAP with leiden clusters labeled
+sc.settings.figdir = "."
+sc.settings.set_figure_params(format="png")
+sc.pl.umap(adata, color='leiden', save=channel_name)
 
 adata.write(results_file)

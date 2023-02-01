@@ -29,7 +29,7 @@ sc.pp.filter_cells(adata, max_genes=parser.maxgenes)
 
 #Filter out the genes that are not expressed in a sufficient number of cells
 num_cells = np.shape(adata)[0]
-min_cells = args.cellpct * num_cells
+min_cells = args.cellpct/100 * num_cells
 sc.pp.filter_genes(adata, min_cells=min_cells)
 
 #Filter out the cells which contain over args.mtpct percent of genes as mitochondrial
