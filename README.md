@@ -15,3 +15,5 @@ Afterwards,
 java -Dconfig.file=default.conf -jar cromwell.jar run scanpy.wdl -i inputs.json
 
 will run the workflow in the present directory. umap PNG files can be found in the embedding task directory. gene rank PNGs and the final h5ad files can be found in the rank_genes task directory (under cromwell-executions).
+
+Note: the Python scripts included with the WDL are already added to the Docker image. You can access the image via atex91/scanpy-project or you can build the image from the Dockerfile provided.
