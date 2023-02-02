@@ -66,7 +66,7 @@ workflow scanpy{
 
 task qc_filtering{
 	input{
-		String h5
+		File h5
 		String name
 		Int mingenes
 		Int maxgenes
@@ -76,7 +76,7 @@ task qc_filtering{
 	}
 
 	command<<<
-		python3 qc_filtering.py -i ~{h5} -o "~{name}.h5ad" -n ~{mingenes} -x ~{maxgenes} -m ~{mtpct} -c ~{cellpct} -r ~{reads}
+		python3 /qc_filtering.py -i ~{h5} -o "~{name}.h5ad" -n ~{mingenes} -x ~{maxgenes} -m ~{mtpct} -c ~{cellpct} -r ~{reads}
 	>>>
 
 	output{
@@ -84,21 +84,19 @@ task qc_filtering{
 	}
 
 	runtime{
-		cpu: "1"
-		memory: "4 G"
 		docker: "atex91/scanpy-project"
 	}
 }
 
 task highly_variable{
 	input{
-		String h5ad
+		File h5ad
 		String name
 		Int ntopgenes
 	}
 
 	command<<<
-		python3 highly_variable.py -i ~{h5ad} -o "~{name}.h5ad" -n ~{ntopgenes}
+		python3 /highly_variable.py -i ~{h5ad} -o "~{name}.h5ad" -n ~{ntopgenes}
 	>>>
 
 	output{
@@ -106,21 +104,19 @@ task highly_variable{
 	}
 
 	runtime{
-		cpu: "1"
-		memory: "8 G"
 		docker: "atex91/scanpy-project"
 	}
 }
 
 task pca{
 	input{
-		String h5ad
+		File h5ad
 		String name
 		Int components
 	}
 
 	command<<<
-		python3 pca.py -i ~{h5ad} -o "~{name}.h5ad" -c ~{components}
+		python3 /pca.py -i ~{h5ad} -o "~{name}.h5ad" -c ~{components}
 	>>>
 
 	output{
@@ -128,22 +124,20 @@ task pca{
 	}
 
 	runtime{
-		cpu: "1"
-		memory: "8 G"
 		docker: "atex91/scanpy-project"
 	}
 }
 
 task nearest_neighbors{
 	input{
-		String h5ad
+		File h5ad
 		String name
 		Int components
 		Int neighbors
 	}
 
 	command<<<
-		python3 nearest_neighbors.py -i ~{h5ad} -o "~{name}.h5ad" -c ~{components} -n ~{neighbors}
+		python3 /nearest_neighbors.py -i ~{h5ad} -o "~{name}.h5ad" -c ~{components} -n ~{neighbors}
 	>>>
 
 	output{
@@ -151,21 +145,19 @@ task nearest_neighbors{
 	}
 
 	runtime{
-		cpu: "1"
-		memory: "8"
 		docker: "atex91/scanpy-project"
 	}
 }
 
 task embedding{
 	input{
-		String h5ad
+		File h5ad
 		String name
 		Float resolution
 	}
 
 	command<<<
-		python3 embedding.py -i ~{h5ad} -o "~{name}.h5ad" -r ~{resolution}
+		python3 /embedding.py -i ~{h5ad} -o "~{name}.h5ad" -r ~{resolution}
 	>>>
 
 	output{
@@ -174,30 +166,26 @@ task embedding{
 	}
 
 	runtime{
-		cpu: "1"
-		memory: "8"
 		docker: "atex91/scanpy-project"
 	}
 }
 
 task rank_genes{
 	input{
-		String h5ad
+		File h5ad
 		String name
 	}
 
 	command<<<
-		python3 rank_genes -i ~{h5ad} -o "~{name}.h5ad"
+		python3 /rank_genes.py -i ~{h5ad} -o "~{name}.h5ad"
 	>>>
 
 	output{
 		File ranked_genes = "~{name}.h5ad"
-		File ranked_genes_png = "rank_genes_groups_~{name}.png"
+		File ranked_genes_png = "rank_genes_groups_leiden_~{name}.png"
 	}
 
 	runtime{
-		cpu: "1"
-		memory: "8"
 		docker: "atex91/scanpy-project"
 	}
 }

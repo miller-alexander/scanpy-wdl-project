@@ -18,9 +18,10 @@ args = parser.parse_args()
 results_file = str(args.outfile)
 
 adata = sc.read_h5ad(str(args.infile))
+adata.uns['log1p']['base'] = None
 
 #Calculate the highly variable genes
-sc.pp.highly_variable_genes(adata, n_top_genes=2000)
+sc.pp.highly_variable_genes(adata, n_top_genes=int(args.ntopgenes))
 
 #Snapshot the log-normalized expression in the .raw attribute and filter
 adata.raw = adata

@@ -17,12 +17,13 @@ args = parser.parse_args()
 results_file = str(args.outfile)
 
 adata = sc.read_h5ad(str(args.infile))
+adata.uns['log1p']['base'] = None
 
 #statistically rank genes via Mann-Whitney U-test
 sc.tl.rank_genes_groups(adata, 'leiden', method='wilcoxon')
 
 #Strip .h5ad off outfile to retrieve name of channel
-channel_name = "_" + results_file.split(".")[0] + ".png"
+channel_name = "_" + results_file.split(".")[0].split("/")[-1] + ".png"
 
 #Set plotting parameters and plot ranked genes
 sc.settings.figdir = "."

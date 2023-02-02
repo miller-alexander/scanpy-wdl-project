@@ -18,17 +18,16 @@ args = parser.parse_args()
 results_file = str(args.outfile)
 
 adata = sc.read_h5ad(str(args.infile))
+adata.uns['log1p']['base'] = None
 
 #embed the graph via UMAP
-sc.tl.paga(adata)
-sc.pl.paga(adata, plot=False)
-sc.tl.umap(adata, init_pos='paga')
+sc.tl.umap(adata)
 
 #perform Leiden clustering
-sc.tl.leiden(adata, resolution=args.resolution)
+sc.tl.leiden(adata, resolution=float(args.resolution))
 
 #Strip .h5ad off outfile to retrieve name of channel
-channel_name = "_" + results_file.split(".")[0] + ".png"
+channel_name = "_" + results_file.split(".")[0].split("/")[-1] + ".png"
 
 #set plotting parameters and plot UMAP with leiden clusters labeled
 sc.settings.figdir = "."

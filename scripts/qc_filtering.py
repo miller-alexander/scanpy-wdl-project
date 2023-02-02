@@ -24,21 +24,21 @@ adata = sc.read_10x_h5(str(args.infile))
 adata.var_names_make_unique()
 
 #Filter out the cells with below args.mingenes number of genes and above args.maxgenes number of genes
-sc.pp.filter_cells(adata, min_genes=parser.mingenes)
-sc.pp.filter_cells(adata, max_genes=parser.maxgenes)
+sc.pp.filter_cells(adata, min_genes=int(args.mingenes))
+sc.pp.filter_cells(adata, max_genes=int(args.maxgenes))
 
 #Filter out the genes that are not expressed in a sufficient number of cells
 num_cells = np.shape(adata)[0]
-min_cells = args.cellpct/100 * num_cells
+min_cells = int(args.cellpct)/100 * num_cells
 sc.pp.filter_genes(adata, min_cells=min_cells)
 
 #Filter out the cells which contain over args.mtpct percent of genes as mitochondrial
 adata.var['mt'] = adata.var_names.str.startswith("MT-")
 sc.pp.calculate_qc_metrics(adata, qc_vars=['mt'], percent_top=None, log1p=False, inplace=True)
-adata = adata[adata.obs.pct_counts_mt < args.mtpct, :]
+adata = adata[adata.obs.pct_counts_mt < int(args.mtpct), :]
 
 #Log-normalize the data
-sc.pp.normalize_total(adata, target_sum=args.reads)
+sc.pp.normalize_total(adata, target_sum=int(args.reads))
 sc.pp.log1p(adata)
 
 adata.write(results_file)

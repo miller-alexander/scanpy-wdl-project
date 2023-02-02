@@ -18,8 +18,9 @@ args = parser.parse_args()
 results_file = str(args.outfile)
 
 adata = sc.read_h5ad(str(args.infile))
+adata.uns['log1p']['base'] = None
 
 #calculate PCA
-sc.tl.pca(adata, n_comps=args.components, svd_solver='arpack')
+sc.tl.pca(adata, n_comps=int(args.components), svd_solver='arpack')
 
 adata.write(results_file)

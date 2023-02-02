@@ -19,8 +19,9 @@ args = parser.parse_args()
 results_file = str(args.outfile)
 
 adata = sc.read_h5ad(str(args.infile))
+adata.uns['log1p']['base'] = None
 
 #compute nearest neighbors graph
-sc.pp.neighbors(adata, n_neighbors=args.neighbors, n_pcs=args.components)
+sc.pp.neighbors(adata, n_neighbors=int(args.neighbors), n_pcs=int(args.components))
 
 adata.write(results_file)
