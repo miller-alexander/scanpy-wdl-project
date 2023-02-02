@@ -1,5 +1,5 @@
 {
-  "scanpy.names": "[Manton_BM1_HiSeq_1, Manton_BM1_HiSeq_2, Manton_BM1_HiSeq_3, Manton_BM1_HiSeq_4, Manton_BM1_HiSeq_5, Manton_BM1_HiSeq_6, Manton_BM1_HiSeq_7, Manton_BM1_HiSeq_8]",
+  "scanpy.names": ["Manton_BM1_HiSeq_1", "Manton_BM1_HiSeq_2", "Manton_BM1_HiSeq_3", "Manton_BM1_HiSeq_4", "Manton_BM1_HiSeq_5", "Manton_BM1_HiSeq_6", "Manton_BM1_HiSeq_7", "Manton_BM1_HiSeq_8"],
   "scanpy.components": "50",
   "scanpy.cellpct": "5",
   "scanpy.ntopgenes": "2000",
@@ -8,6 +8,6 @@
   "scanpy.neighbors": "100",
   "scanpy.resolution": "1.3",
   "scanpy.maxgenes": "6000",
-  "scanpy.channels": "[Manton_BM1_HiSeq_1.h5, Manton_BM1_HiSeq_2.h5, Manton_BM1_HiSeq_3.h5, Manton_BM1_HiSeq_4.h5, Manton_BM1_HiSeq_5.h5, Manton_BM1_HiSeq_6.h5, Manton_BM1_HiSeq_7.h5, Manton_BM1_HiSeq_8.h5]",
+  "scanpy.channels": ["/genentech/data/Manton_BM1_HiSeq_1.h5", "/genentech/data/Manton_BM1_HiSeq_2.h5", "/genentech/data/Manton_BM1_HiSeq_3.h5", "/genentech/data/Manton_BM1_HiSeq_4.h5", "/genentech/data/Manton_BM1_HiSeq_5.h5", "/genentech/data/Manton_BM1_HiSeq_6.h5", "/genentech/data/Manton_BM1_HiSeq_7.h5", "/genentech/data/Manton_BM1_HiSeq_8.h5"],
   "scanpy.reads": "100000"
 }
